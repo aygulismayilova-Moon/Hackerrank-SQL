@@ -1,0 +1,10 @@
+SET NOCOUNT ON;
+/*Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+select name +'('+substring(occupation,1,1)+')' from occupations  order by name 
+select 'There are a total of ' ,case occ when '(A)' then cnt +' actors.' when '(D)' then cnt+' doctors.' when '(P)' then cnt+' professors.' when '(S)' then cnt+' singers.' else '' end [num] from (
+select '('+substring(occupation,1,1)+')' [occ], cast(count(occupation) as varchar(10)) [cnt]  from occupations 
+group by substring(occupation,1,1) 
+) as  XY order by cnt,occ 
+GO 
