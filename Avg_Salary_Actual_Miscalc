@@ -1,0 +1,19 @@
+set NOCOUNT ON;
+/*
+Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+declare @a float
+declare @b float 
+set @a=(
+select avg(cast(salary as decimal(10,2))) from Employees
+)
+set @b= (
+select avg(cast (replace(salary,0,'') as decimal(10,2)) )from Employees 
+)
+declare @c int 
+set @c =(
+select ceiling(@a-@b))
+select @c 
+
+go 
