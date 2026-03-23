@@ -1,0 +1,8 @@
+SET NOCOUNT ON;
+/*
+Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+select cast(sum(c.population) as int) from city c inner join 
+country ct with (nolock) on c.countrycode=ct.code where continent='Asia'
+GO 
