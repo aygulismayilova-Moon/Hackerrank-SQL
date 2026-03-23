@@ -1,0 +1,4 @@
+declare @a int 
+set @a=(
+select max(months*salary) from employee )
+select months*salary,count(months*salary) from Employee where months*salary=@a  group by months*salary 
