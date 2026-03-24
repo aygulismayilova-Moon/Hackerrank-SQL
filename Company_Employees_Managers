@@ -1,0 +1,9 @@
+SET NOCOUNT ON;
+/* Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+/*
+
+select e.company_code,founder,count(distinct lead_manager_code ),count(distinct senior_manager_code),count (distinct manager_code ),count(distinct Employee_code) from Employee e inner join Company c with (nolock) on e.company_code=c.company_code group by e.company_code , founder 
+
+GO 
