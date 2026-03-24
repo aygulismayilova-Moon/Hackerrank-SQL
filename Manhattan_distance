@@ -1,0 +1,16 @@
+/*
+Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+declare @a float 
+declare @b float 
+declare @c float 
+declare @d float 
+
+set @a = (select cast(min(lat_n ) as decimal(10,4)) from station)
+set @b=(select cast(min(long_w) as decimal(10,4)) from station)
+set @c=(select cast(max(lat_n) as decimal(10,4)) from station )
+set @d=(select cast(max(long_w) as decimal(10,4)) from station)
+
+
+select round(abs(@a-@c)+abs(@b-@d),4) 
