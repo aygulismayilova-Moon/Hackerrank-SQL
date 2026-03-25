@@ -1,0 +1,16 @@
+SET NOCOUNT ON;
+/*Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+
+create table #tmp (a int, b varchar(20))
+insert into #tmp (a, b ) 
+select N,'Inner' from BST where N In (select P from BST ) and P is not Null 
+union all 
+select N,'Root' from BST where N is not Null and ( P is Null ) and N in (select P from BST )
+union all 
+select N,'Leaf' from BST where N not in (
+select N from BST where N  in (select P from BST))
+
+select * from #tmp order by a
+GO 
