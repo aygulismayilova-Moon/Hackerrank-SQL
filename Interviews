@@ -1,0 +1,37 @@
+/*
+Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+create table #t (X int, Y int, Num int)
+insert into #t (X,Y,Num)
+select X,Y , row_number() over(order by X,Y ) num from functions
+declare @n int
+set @n=(select count(X) from #t)
+declare @a int
+set @a=0 
+declare @x int 
+declare @y int 
+declare @i int 
+set @i=0 
+declare @z int
+declare @d int 
+declare @s int 
+create table #t1 (i int,X int)
+
+while @a<@n
+begin 
+
+set @z =(select X from #t where num=@a+1)
+set @d =(select Y from #t where num =@a )
+set @s =(select Y from #t where num =@a+1 )
+set @x =(select count(X) from #t where X=@z )
+set @y =(select count(Y) from #t where Y=@d )
+set @a=@a+1 
+IF  @d=@z and @x=@y 
+begin 
+set @i=@i+1 
+ insert into #t1 (i,X) values(@z,@s  )
+ end 
+
+end 
+select * from #t1 
