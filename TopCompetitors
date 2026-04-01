@@ -1,0 +1,9 @@
+SET NOCOUNT on; 
+/*Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+select h.hacker_id hi, name, ch.challenge_id cnt   from hackers h left  join challenges ch with (nolock) on h.hacker_id=ch.hacker_id left  join submissions ss with (nolock) on ss.hacker_id =ch.hacker_id and ch.challenge_id =ss.challenge_id  inner join Difficulty df with (nolock) on df.difficulty_level=ch.difficulty_level*/
+select hacker_id , name  from (
+select ss.hacker_id , h.name ,count(ss.challenge_id) cnt from submissions ss left join hackers h with (nolock) on ss.hacker_id =h.hacker_id  left join challenges ch with (nolock) on ss.challenge_id =ch.challenge_id left join difficulty df with (nolock) on df.difficulty_level=ch.difficulty_level where ss.score =df.score 
+group by ss.hacker_id , h.name ) as d where cnt >1 order by cnt desc , hacker_id 
+go 
